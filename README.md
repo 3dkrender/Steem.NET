@@ -22,7 +22,12 @@ If you don't have Json.NET from Newtonsoft installed, simply add the provided Ne
 
 That's it ! You're nowready to communicate with your local  node 
 
-# IMPORTANT NOTE
+## Remark
+
+The class library is quite 'read-lony' at the moment but shats a good start to browse any information in the blockchain.
+I still have to implement posts, upvotes and comment
+
+## IMPORTANT NOTE
 
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
