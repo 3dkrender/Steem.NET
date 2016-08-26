@@ -6,7 +6,9 @@
 
 You have to have a local steemd running node
 check [Steem Windows mining guide](https://steemit.com/steem/@bitcube/steem-mining-in-microsoft-windows-a-miner-s-guide-part-2) for more information on how to do it.
+
 Your node must have rpc-endpoint listenig to 127.0.0.1:8090.
+
 You don't need to mine effectively, a simple syncing node is OK
 
 ## Quick-Start
