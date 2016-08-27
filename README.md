@@ -19,32 +19,14 @@ By default, CSteemd object will try to connect to host **"127.0.0.1:8091"**
 
 ## Quick-Start
 
-###Using Steem.NET COM library
-Steem.NET API is precompiled in a DLL. 
-Download an copy the following files to any directory that fit your needs :
-```
-StemAPI.dll
-Newtonsoft.Json.dll
-```
-Add it to any project or use it in anny application able to dialog with COM objects (Words, Excel, ...)
+Steem.NET API is currently provided in different bundles :
 
-###Using Microsoft Visual Studio VB.NET classes
-Create a VB.NET project and add following classes :
-```
-CJson.vb
-CSteemAPI.vb
-CSteemd.vb
-CSteemWallet.vb
-```
+1. Steem.NET **COM library** you can use in any application able talk with COM objects (Words, Excel, ...)
 
-If you don't have Json.NET from Newtonsoft installed, simply add the provided Newtonsoft.Json.dll to you project references
-
-That's it ! You're nowready to communicate with your local  node 
+2. Steem.NET **VB.NET classes** you can integrate in you own Microsoft Visual Studio project
 
 ## Remark
-
-The class library is quite 'read-lony' at the moment but shats a good start to browse any information in the blockchain.
-I still have to implement posts, upvotes and comment
+Steem.NET will be ported soon to C#
 
 ## IMPORTANT NOTE
 
