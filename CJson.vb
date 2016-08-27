@@ -133,6 +133,7 @@ Public Class CJson
 #Region "Public methods"
 
     Public Function SendRequest(strMethod As String, Optional strParams As ArrayList = Nothing) As String
+        Dim nRetry As Integer = 0
         Dim strResult As String = String.Empty
         Dim arrRequest As New Hashtable
         arrRequest("jsonrpc") = m_oJsonRpc.Version
@@ -143,7 +144,6 @@ Public Class CJson
         End If
 
         Dim strJson As String = JsonConvert.SerializeObject(arrRequest)
-
         For nRetry = 1 To 2
             Try
                 strResult = GetHttpRequest(strJson, EHTTPMethod.POST)
@@ -155,7 +155,7 @@ Public Class CJson
                     Throw ex
                 End If
             End Try
-            ' wait 1 sec to give a second chance to a busy server
+            ' wait 1 sec to give a seconde chance to a busy server
             Threading.Thread.Sleep(1000)
         Next
 
