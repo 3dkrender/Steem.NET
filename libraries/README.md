@@ -1,6 +1,6 @@
 # Steem.NET
 
-.NET library to interact with the STEEM Blockchain and Zallet
+.NET library to interact with the STEEM Blockchain and Wallet
 
 ###Using Steem.NET COM library
 Steem.NET API is precompiled in a DLL. 
