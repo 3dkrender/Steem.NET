@@ -3,7 +3,7 @@ Module Test
 
     Public Sub Main()
 
-        Using oSteem As New CSteemAPI
+        Using oSteem As New CSteemd
 
             Debug.Print(oSteem.get_config.ToString)
             Debug.Print(oSteem.get_account_count.ToString)
