@@ -4,18 +4,37 @@
 
 ## Prerequisites
 
-You have to have a local steemd running node
+1. Steemd 
+
+To communicate with **steemd** you need a local steemd running node with  rpc-endpoint open
+By default, CSteemd object will try to connect to host **"127.0.0.1:8090"**
+
 check [Steem Windows mining guide](https://steemit.com/steem/@bitcube/steem-mining-in-microsoft-windows-a-miner-s-guide-part-2) for more information on how to do it.
-
-Your node must have rpc-endpoint listening to 127.0.0.1:8090.
-
 You don't need to mine effectively, a simple syncing node is OK
 
+2. cli_wallet
+ 
+To communicate with **cli-wallet** you need a local cli_wallet running node with  rpc-endpoint open
+By default, CSteemd object will try to connect to host **"127.0.0.1:8091"**
+
 ## Quick-Start
-Create a VB.NET project and add both classes
+
+###Using Steem.NET COM library
+Steem.NET API is precompiled in a DLL. 
+Download an copy the following files to any directory that fit your needs :
+```
+StemAPI.dll
+Newtonsoft.Json.dll
+```
+Add it to any project or use it in anny application able to dialog with COM objects (Words, Excel, ...)
+
+###Using Microsoft Visual Studio VB.NET classes
+Create a VB.NET project and add following classes :
 ```
 CJson.vb
 CSteemAPI.vb
+CSteemd.vb
+CSteemWallet.vb
 ```
 
 If you don't have Json.NET from Newtonsoft installed, simply add the provided Newtonsoft.Json.dll to you project references
