@@ -6,11 +6,16 @@
 
 1. Steemd 
 
-To communicate with **steemd** you need a local steemd running node with  rpc-endpoint open
-By default, CSteemd object will try to connect to host **"127.0.0.1:8090"**
+To communicate with **steemd** you need either a local steemd running node with  rpc-endpoint open or have access to a remote node using Websocket.
 
-check [Steem Windows mining guide](https://steemit.com/steem/@bitcube/steem-mining-in-microsoft-windows-a-miner-s-guide-part-2) for more information on how to do it.
-You don't need to mine effectively, a simple syncing node is OK
+CSteemd as two constructors :
+a. One  using a host and port
+   CSteemd object will try to connect to host **"127.0.0.1:8090"** by default
+   
+b. One using a websocket server URI
+
+If you want tp use a local node, check [Steem Windows mining guide](https://steemit.com/steem/@bitcube/steem-mining-in-microsoft-windows-a-miner-s-guide-part-2) for more information on how to do it.
+You don't need to mine, a  syncing only node is OK
 
 2. cli_wallet
  
