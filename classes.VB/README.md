@@ -9,11 +9,12 @@ CJson.vb
 CSteemAPI.vb
 CSteemd.vb
 CSteemWallet.vb
+CWebSocket.vb
 ```
 
 If you don't have Json.NET from Newtonsoft installed, simply add the provided Newtonsoft.Json.dll to you project references
 
-That's it ! You're nowready to communicate with your local node 
+That's it ! You're nowready to communicate with any steem node, either local or remote 
 
 ## Remark
 **CSteemd** class exposes all steemd API (used to browse blockchain information)
