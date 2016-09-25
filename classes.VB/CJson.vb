@@ -30,9 +30,7 @@ Public Class CJson
 #Region "Variables"
     Private m_nRequestID As Integer
     Private m_strHostname As String
-    Private m_strcookies As String
     Private m_strURL As String
-    Private m_nTimeOut As Integer = 30
     Private m_oJsonRpc As SJsonRPC
 
 #End Region
@@ -47,7 +45,7 @@ Public Class CJson
             .Version = strVersion
         End With
 
-        m_strURL = String.Format("http:\\{0}:{1}{2}", m_strHostname, m_oJsonRpc.Port, m_oJsonRpc.Api)
+        m_strURL = String.Format("http://{0}:{1}{2}", m_strHostname, m_oJsonRpc.Port, m_oJsonRpc.Api)
 
         'Bypass SSL
         ServicePointManager.ServerCertificateValidationCallback = New Security.RemoteCertificateValidationCallback(AddressOf CertificateValidationCallBack)
@@ -77,20 +75,20 @@ Public Class CJson
                 strBodyRequest = strData.Replace("\r", "").Replace("\n", "").Replace("\r\n", "").Replace("\t", "")
             Case EHTTPMethod.GET
                 oRequest.Method = "GET"
-                oRequest.Headers.Add("GET:" & String.Format("{0} HTTP/1.1", strData))
+                oRequest.Headers.Add(String.Format("GET:{0} HTTP/1.1", strData))
                 oRequest.Accept = "*/*"
                 strBodyRequest = strData
             Case EHTTPMethod.PUT
                 Dim strBoundary As String = Now.Ticks.ToString.Substring(0, 10)
-                oRequest.Headers.Add("POST:" & String.Format("{0}{1} HTTP/1.1", m_oJsonRpc.Api, "upload/"))
+                oRequest.Headers.Add(String.Format("POST:{0}{1} HTTP/1.1", m_oJsonRpc.Api, "upload/"))
                 oRequest.Method = "POST"
                 oRequest.Accept = "*/*"
                 oRequest.ContentType = String.Format("multipart/form-data; boundary=%s", strBoundary)
                 strBodyRequest = String.Format("--{0}{1}", strBoundary, CJson.CRLF)
-                strBodyRequest &= String.Format("Content-Disposition: form-data; name=""unknown""; filename=""newFile.bin""{0}", CJson.CRLF)
-                strBodyRequest &= String.Format("{0}", CJson.CRLF)
-                strBodyRequest &= String.Format("{0}{1}", strData, CJson.CRLF)
-                strBodyRequest = String.Format("--{0}--{1}", strBoundary, CJson.CRLF)
+                strBodyRequest += String.Format("Content-Disposition: form-data; name=""unknown""; filename=""newFile.bin""{0}", CJson.CRLF)
+                strBodyRequest += String.Format("{0}", CJson.CRLF)
+                strBodyRequest += String.Format("{0}{1}", strData, CJson.CRLF)
+                strBodyRequest += String.Format("--{0}--{1}", strBoundary, CJson.CRLF)
             Case Else
                 Throw New Exception("Method not found : supported : GET/POST/PUT")
         End Select
@@ -136,6 +134,7 @@ Public Class CJson
         Dim nRetry As Integer = 0
         Dim strResult As String = String.Empty
         Dim arrRequest As New Hashtable
+
         arrRequest("jsonrpc") = m_oJsonRpc.Version
         arrRequest("id") = Me.getRequestID
         arrRequest("method") = strMethod
