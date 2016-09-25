@@ -2,11 +2,14 @@
 
 Public Class CSteemd
     Inherits CSteemAPI
-    Implements IDisposable
 
 #Region "Constructors"
     Sub New(Optional strHostname As String = "127.0.0.1", Optional nPort As UShort = 8090)
         MyBase.New(strHostname, nPort)
+    End Sub
+
+    Sub New(strURI As String)
+        MyBase.New(strURI)
     End Sub
 
 #End Region
@@ -54,6 +57,13 @@ Public Class CSteemd
     Public Function lookup_account_names(arrAccounts As ArrayList) As JArray
         Dim arrParams As New ArrayList
         arrParams.Add(arrAccounts)
+        Return call_api_array(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
+    End Function
+
+    Public Function lookup_accounts(strLowerbound As String, nLimit As UInteger) As JArray
+        Dim arrParams As New ArrayList
+        arrParams.Add(strLowerbound)
+        arrParams.Add(nLimit)
         Return call_api_array(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
     End Function
 
@@ -182,38 +192,6 @@ Public Class CSteemd
         Return call_api_token(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
     End Function
 
-
-#End Region
-
-#Region "IDisposable implementation"
-    Private disposedValue As Boolean ' To detect redundant calls
-
-    ' IDisposable
-    Protected Overridable Sub Dispose(disposing As Boolean)
-        If Not Me.disposedValue Then
-            If disposing Then
-                ' TODO: dispose managed state (managed objects).
-            End If
-
-            ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
-            ' TODO: set large fields to null.
-        End If
-        Me.disposedValue = True
-    End Sub
-
-    ' TODO: override Finalize() only if Dispose(ByVal disposing As Boolean) above has code to free unmanaged resources.
-    'Protected Overrides Sub Finalize()
-    '    ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
-    '    Dispose(False)
-    '    MyBase.Finalize()
-    'End Sub
-
-    ' This code added by Visual Basic to correctly implement the disposable pattern.
-    Public Sub Dispose() Implements IDisposable.Dispose
-        ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
-        Dispose(True)
-        GC.SuppressFinalize(Me)
-    End Sub
 #End Region
 
 End Class
