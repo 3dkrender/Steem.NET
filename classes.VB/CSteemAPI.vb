@@ -1,12 +1,47 @@
 ﻿Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Public Class CSteemAPI
-    Inherits CJson
+    Implements IDisposable
 
+#Region "Enums"
+
+    Private Enum EType
+        [RPC]
+        [WS]
+    End Enum
+
+#End Region
+
+#Region "Variables"
+    Private m_eType As EType
+    Private m_oJson As CJson
+    Private m_oSocket As CWebSocket
+#End Region
 #Region "Constructors"
     Sub New(strHostname As String, nPort As UShort)
-        MyBase.New(strHostname, nPort, "/rpc")
+        m_oJson = New CJson(strHostname, nPort, "/rpc")
+        m_eType = EType.RPC
     End Sub
+
+    Sub New(strURI As String)
+        m_oSocket = New CWebSocket(strURI)
+        m_eType = EType.WS
+    End Sub
+
+#End Region
+
+#Region "Private methods"
+    Private Function SendRequest(strMethod As String, Optional strParams As ArrayList = Nothing) As String
+
+        If m_eType = EType.RPC Then
+            Return m_oJson.SendRequest(strMethod, strParams)
+        Else
+            Using t As Task(Of String) = m_oSocket.SendRequest(strMethod, strParams)
+                t.Wait()
+                Return t.Result
+            End Using
+        End If
+    End Function
 
 #End Region
 
@@ -43,6 +78,12 @@ Public Class CSteemAPI
         Return JsonConvert.DeserializeObject(SendRequest(strMethod)).Item("result")
     End Function
 
+#End Region
+
+#Region "IDisposable Support"
+    Public Sub Dispose() Implements IDisposable.Dispose
+        m_oSocket.Dispose()
+    End Sub
 #End Region
 
 End Class
