@@ -8,7 +8,7 @@
 
 To communicate with **steemd** you need either a local steemd running node with  rpc-endpoint open or have access to a remote node using Websocket.
 
-CSteemd as two constructors :
+CSteemd as two constructors:
 a. One  using a host and port
    CSteemd object will try to connect to host **"127.0.0.1:8090"** by default
    
