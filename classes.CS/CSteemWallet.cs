@@ -8,7 +8,7 @@ namespace SteemAPI.CS
 	class CSteemWallet : CSteemAPI
 	{
 		#region Constructors
-		public CSteemWallet(string strHostname  = "127.0.0.1", ushort nPort = 8091) : base(strHostname, nPort)
+		public CSteemWallet(string strHostname = "127.0.0.1", ushort nPort = 8091) : base(strHostname, nPort)
 		{
 		}
 		#endregion
@@ -81,7 +81,7 @@ namespace SteemAPI.CS
 		//    new_account_name: The name Of the New account (type: String)
 		//    json_meta: JSON Metadata associated With the New account (type: String)
 		//    broadcast: true if you wish to broadcast the transaction (type: bool)
-	    public JObject create_account(string creator, string new_account_name, string json_meta, bool broadcast = true)
+		public JObject create_account(string creator, string new_account_name, string json_meta, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(creator);
@@ -105,7 +105,7 @@ namespace SteemAPI.CS
 		//    posting: Public posting key Of the New account (type: public_key_type)
 		//    memo: Public memo key Of the New account (type: public_key_type)
 		//    broadcast: true if you wish to broadcast the transaction (type: bool)
-		public JObject create_account_with_keys(string creator, string newname, string json_meta, string owner, string active, string posting, string memo , bool broadcast = true)
+		public JObject create_account_with_keys(string creator, string newname, string json_meta, string owner, string active, string posting, string memo, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(creator);
@@ -130,7 +130,7 @@ namespace SteemAPI.CS
 		//    fill_or_kill: true if you want the order to be killed if it cannot immediately be filled (type: bool)
 		//    expiration: the time the order should expire If it has Not been filled (type: uint32_t)
 		//    broadcast: true if you wish to broadcast the transaction (type: bool)
-		public JObject create_order(string owner, UInt32 order_id , Decimal amount_to_sell , Decimal min_to_receive, bool fill_or_kill, UInt32 expiration, bool broadcast = true)
+		public JObject create_order(string owner, UInt32 order_id, Decimal amount_to_sell, Decimal min_to_receive, bool fill_or_kill, UInt32 expiration, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(owner);
@@ -162,7 +162,7 @@ namespace SteemAPI.CS
 		//     account_name: the name Of the account To provide information about (type: String)
 		//Returns
 		//    the Public account data stored In the blockchain
-		public JObject get_account(string account_name )
+		public JObject get_account(string account_name)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(account_name);
@@ -178,7 +178,7 @@ namespace SteemAPI.CS
 		//    from: - the absolute sequence number, -1 means most recent, limit Is
 		//    the number Of operations before from. (type: uint32_t)
 		//    limit: - the maximum number of items that can be queried (0 to 1000], must be less than from (type: uint32_t)
-		public JToken get_account_history(string account, UInt32 from, UInt32 limit )
+		public JToken get_account_history(string account, UInt32 from, UInt32 limit)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(account);
@@ -214,7 +214,7 @@ namespace SteemAPI.CS
 		//
 		//Returns
 		//    All pending conversion requests by account
-		public JArray get_conversion_requests(string owner )
+		public JArray get_conversion_requests(string owner)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(owner);
@@ -253,7 +253,7 @@ namespace SteemAPI.CS
 			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
 
-		public JArray get_outbox(string account , DateTime newest , UInt32 limit)
+		public JArray get_outbox(string account, DateTime newest, UInt32 limit)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(account);
@@ -262,7 +262,7 @@ namespace SteemAPI.CS
 			return call_api_array(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
 
-		public JArray get_owner_history(string strAccount )
+		public JArray get_owner_history(string strAccount)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(strAccount);
@@ -313,7 +313,7 @@ namespace SteemAPI.CS
 		}
 
 		//Returns the state info associated With the URL
-		public JObject get_state(string url )
+		public JObject get_state(string url)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(url);
@@ -469,7 +469,7 @@ namespace SteemAPI.CS
 		//    Returns
 		//        a list Of witnesss mapping witness names To witness ids
 		//
-		public JArray list_witnesses(string lowerbound , UInt32 limit)
+		public JArray list_witnesses(string lowerbound, UInt32 limit)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(lowerbound);
@@ -488,7 +488,7 @@ namespace SteemAPI.CS
 		//    Returns
 		//        true if the specified wallet Is loaded
 		public bool load_wallet_file(string wallet_filename)
-		{ 
+		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(wallet_filename);
 			return (bool)call_api_value(MethodBase.GetCurrentMethod().Name, arrParams);
@@ -572,7 +572,7 @@ namespace SteemAPI.CS
 		//         witness: The witness publishing the price feed (type: String)
 		//        exchange_rate: The desired exchange rate (type: price)
 		//        broadcast: true if you wish to broadcast the transaction (type: bool)
-		public JObject publish_feed(string witness , Decimal exchange_rate, bool broadcast = true)
+		public JObject publish_feed(string witness, Decimal exchange_rate, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(witness);
@@ -615,7 +615,7 @@ namespace SteemAPI.CS
 			call_api(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
 
-		public JObject send_private_message(string from , string to, string subject, string body, bool broadcast = true)
+		public JObject send_private_message(string from, string to, string subject, string body, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(from);
@@ -713,12 +713,50 @@ namespace SteemAPI.CS
 		//        amount: The amount Of STEEM To vest i.e. "100.00 STEEM" (type: asset)
 		//        broadcast: true if you wish to broadcast the transaction (type: bool)
 
-		public JObject transfer_to_vesting(string from, string to, Decimal amount , bool broadcast = true)
+		public JObject transfer_to_vesting(string from, string to, Decimal amount, bool broadcast = true)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(from);
 			arrParams.Add(to);
 			arrParams.Add(amount);
+			arrParams.Add(broadcast);
+			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
+		}
+
+		// Transfers into savings happen immediately, transfers from savings take 72 hours
+		//
+		public JObject transfer_to_savings(string from, string to, string amount, string memo, bool broadcast = false)
+		{
+			ArrayList arrParams = new ArrayList();
+			arrParams.Add(from);
+			arrParams.Add(to);
+			arrParams.Add(amount);
+			arrParams.Add(broadcast);
+			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
+		}
+
+
+		// @param request_id - an unique ID assigned by from account, the id is used to cancel the operation and can be reused after the transfer completes
+		//
+		public JObject transfer_from_savings(string from, UInt32 request_id, string to, string amount, string memo, bool broadcast = false)
+		{
+			ArrayList arrParams = new ArrayList();
+			arrParams.Add(from);
+			arrParams.Add(request_id);
+			arrParams.Add(to);
+			arrParams.Add(amount);
+			arrParams.Add(broadcast);
+			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
+		}
+
+		// @param request_id the id used in transfer_from_savings
+		// @param from the account that initiated the transfer
+		//
+		public JObject cancel_transfer_from_savings(string from, UInt32 request_id, bool broadcast = false)
+		{
+			ArrayList arrParams = new ArrayList();
+			arrParams.Add(from);
+			arrParams.Add(request_id);
 			arrParams.Add(broadcast);
 			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
