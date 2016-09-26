@@ -662,6 +662,41 @@ Public Class CSteemWallet
         Return call_api(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
     End Function
 
+    ''' Transfers into savings happen immediately, transfers from savings take 72 hours
+    '''
+    Public Function transfer_to_savings(from As String, [To] As String, amount As String, memo As String, Optional broadcast As Boolean = False) As JObject
+        Dim arrParams As New ArrayList
+        arrParams.Add(from)
+        arrParams.Add([To])
+        arrParams.Add(amount)
+        arrParams.Add(memo)
+        arrParams.Add(broadcast)
+        Return call_api(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
+    End Function
+
+    ''' @param request_id - an unique ID assigned by from account, the id Is used to cancel the operation And can be reused after the transfer completes
+    '''
+    Public Function transfer_from_savings(from As String, request_id As UInt32, [To] As String, amount As String, memo As String, Optional broadcast As Boolean = False) As JObject
+        Dim arrParams As New ArrayList
+        arrParams.Add(from)
+        arrParams.Add(request_id)
+        arrParams.Add([To])
+        arrParams.Add(amount)
+        arrParams.Add(memo)
+        arrParams.Add(broadcast)
+        Return call_api(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
+    End Function
+
+    ''' @param request_id the id used in transfer_from_savings
+    ''' @param from the account that initiated the transfer
+    '''
+    Public Function cancel_transfer_from_savings(from As String, request_id As UInt32, Optional broadcast As Boolean = False) As JObject
+        Dim arrParams As New ArrayList
+        arrParams.Add(from)
+        arrParams.Add(request_id)
+        arrParams.Add(broadcast)
+        Return call_api(Reflection.MethodBase.GetCurrentMethod.Name, arrParams)
+    End Function
 
     '''    The wallet remain unlocked until the 'lock' is called or the program exits.
     '''
