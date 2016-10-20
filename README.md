@@ -30,8 +30,7 @@ Steem.NET API is currently provided in different bundles :
 
 2. Steem.NET **VB.NET classes** you can integrate in you own Microsoft Visual Studio project
 
-## Remark
-Steem.NET will be ported soon to C#
+3. Steem.NET **C#.NET classes** you can integrate in you own Microsoft Visual Studio project
 
 ## IMPORTANT NOTE
 
