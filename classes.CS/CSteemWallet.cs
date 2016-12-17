@@ -551,6 +551,7 @@ namespace SteemAPI.CS
 			arrParams.Add(parent_permlink);
 			arrParams.Add(title);
 			arrParams.Add(body);
+			arrParams.Add(json)
 			arrParams.Add(broadcast);
 			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
