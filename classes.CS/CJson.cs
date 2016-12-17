@@ -107,7 +107,7 @@ namespace SteemAPI.CS
 			{
 				// Setting DATA
 				StringBuilder oStringBuilder = new StringBuilder().Append(strBodyRequest);
-				byte[] aData = Encoding.Default.GetBytes(oStringBuilder.ToString());
+				byte[] aData = Encoding.UTF8.GetBytes(oStringBuilder.ToString());
 
 				oRequest.Headers.Add(string.Format("ContentLength: {0}", aData.Length));
 
