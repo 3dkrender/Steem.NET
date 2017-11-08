@@ -5,14 +5,10 @@ using Newtonsoft.Json.Linq;
 
 namespace SteemAPI.CS
 {
-	class CSteemd : CSteemAPI
+	public class CSteemd : CSteemAPI
 	{
 		#region Constructors
-		public CSteemd(string strHostname = "127.0.0.1", ushort nPort = 8090) : base(strHostname, nPort)
-		{
-		}
-
-		public CSteemd(string strURI) : base(strURI)
+		public CSteemd(string strHostname = "127.0.0.1", EType type = EType.RPC, ushort nPort = 8090) : base(strHostname, type, nPort)
 		{
 		}
 		#endregion 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SteemAPI.CS
 {
-	class CSteemAPI : IDisposable
+    public class CSteemAPI : IDisposable
 	{
 
 		#region Enums
-		private enum EType
+		public enum EType
 		{
 			RPC,
 			WS
@@ -25,16 +25,15 @@ namespace SteemAPI.CS
 		#endregion
 
 		#region Constructors
-		public CSteemAPI(string strHostname, ushort nPort)
+		public CSteemAPI(string strHostname, EType type = EType.RPC, ushort nPort = 8090)
 		{
-			m_oJson = new CJson(strHostname, nPort, "/rpc");
-			m_eType = EType.RPC;
-		}
+            if(type == EType.RPC)
+			    m_oJson = new CJson(strHostname, nPort, "/rpc");
 
-		public CSteemAPI(string strURI)
-		{
-			m_oSocket = new CWebsocket(strURI);
-			m_eType = EType.WS;
+            if(type == EType.WS)
+                m_oSocket = new CWebsocket(strHostname);
+
+            m_eType = type;
 		}
 		#endregion
 
@@ -59,34 +58,32 @@ namespace SteemAPI.CS
 		#region protected methods
 		protected JObject call_api(string strMethod)
 		{
-			return (JObject)JsonConvert.DeserializeObject<Dictionary<string, JObject>>(SendRequest(strMethod))["result"];
+			return (JObject)JsonConvert.DeserializeObject<Dictionary<string, JToken>>(SendRequest(strMethod))["result"];
 		}
 
 		protected JObject call_api(string strMethod, ArrayList arrParams)
 		{ 
-			return (JObject)JsonConvert.DeserializeObject<Dictionary<string, JObject>>(SendRequest(strMethod, arrParams))["result"];
+			return (JObject)JsonConvert.DeserializeObject<Dictionary<string, JToken>>(SendRequest(strMethod, arrParams))["result"];
 		}
 
 		protected JArray call_api_array(string strMethod, ArrayList arrParams)
 		{
-			return (JArray)JsonConvert.DeserializeObject<Dictionary<string, JArray>>(SendRequest(strMethod, arrParams))["result"];
+            return (JArray)JsonConvert.DeserializeObject<Dictionary<string, JToken>>(SendRequest(strMethod, arrParams))["result"];
 		}
 
 		protected JArray call_api_array(string strMethod)
 		{ 
-			return (JArray)JsonConvert.DeserializeObject<Dictionary<string, JArray>>(SendRequest(strMethod))["result"];
+			return (JArray)JsonConvert.DeserializeObject<Dictionary<string, JToken>>(SendRequest(strMethod))["result"];
 		}
 
 		protected JValue call_api_value(string strMethod)
 		{
-
 			return (JValue)JsonConvert.DeserializeObject<Dictionary<string, JValue>>(SendRequest(strMethod))["result"];
 		}
 
 		protected JValue call_api_value(string strMethod, ArrayList arrParams)
 		{
 			return (JValue)JsonConvert.DeserializeObject<Dictionary<string, JValue>>(SendRequest(strMethod, arrParams))["result"];
-
 		}
 
 		protected JToken call_api_token(string strMethod, ArrayList arrParams)
