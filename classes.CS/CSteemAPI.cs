@@ -22,16 +22,30 @@ namespace SteemAPI.CS
 		private EType m_eType;
 		private CJson m_oJson;
 		private CWebsocket m_oSocket;
-		#endregion
+        #endregion
 
-		#region Constructors
-		public CSteemAPI(string strHostname, EType type = EType.RPC, ushort nPort = 8090)
+        #region Constructors
+        public CSteemAPI(string strHostname) : this(strHostname, EType.RPC)
+        {
+            
+        }
+
+        public CSteemAPI(string strHostname, EType type) : this(strHostname, EType.RPC, 8090)
+        {
+
+        }
+
+        public CSteemAPI(string strHostname, EType type, ushort nPort)
 		{
-            if(type == EType.RPC)
-			    m_oJson = new CJson(strHostname, nPort, "/rpc");
+            if (type == EType.RPC)
+            {
+                m_oJson = new CJson(strHostname, nPort, "/rpc");
+            }
 
-            if(type == EType.WS)
+            if (type == EType.WS)
+            {
                 m_oSocket = new CWebsocket(strHostname);
+            }
 
             m_eType = type;
 		}
