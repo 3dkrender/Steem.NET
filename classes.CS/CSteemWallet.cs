@@ -5,10 +5,10 @@ using Newtonsoft.Json.Linq;
 
 namespace SteemAPI.CS
 {
-	class CSteemWallet : CSteemAPI
+    public class CSteemWallet : CSteemAPI
 	{
 		#region Constructors
-		public CSteemWallet(string strHostname = "127.0.0.1", ushort nPort = 8091) : base(strHostname, nPort)
+		public CSteemWallet(string strHostname = "127.0.0.1", EType type = EType.RPC, ushort nPort = 8091) : base(strHostname, type, nPort)
 		{
 		}
 		#endregion
@@ -551,7 +551,7 @@ namespace SteemAPI.CS
 			arrParams.Add(parent_permlink);
 			arrParams.Add(title);
 			arrParams.Add(body);
-			arrParams.Add(json)
+            arrParams.Add(json);
 			arrParams.Add(broadcast);
 			return call_api(MethodBase.GetCurrentMethod().Name, arrParams);
 		}

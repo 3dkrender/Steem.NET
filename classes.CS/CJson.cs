@@ -48,13 +48,12 @@ namespace SteemAPI.CS
 			m_oJsonRpc.Port = nPort;
 			m_oJsonRpc.Api = strApi;
 			m_oJsonRpc.Version = strVersion;
-
-			m_strURL = string.Format("http:\\{0}:{1}{2}", m_strHostname, m_oJsonRpc.Port, m_oJsonRpc.Api);
+            m_strURL = strHostname;
 
 			// Bypass SSL
 			ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; });
 			ServicePointManager.Expect100Continue = true;
-			ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		}
 		#endregion
 
