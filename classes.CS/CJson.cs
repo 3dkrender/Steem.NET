@@ -144,9 +144,9 @@ namespace SteemAPI.CS
 			arrRequest["jsonrpc"] = m_oJsonRpc.Version;
 			arrRequest["id"] = getRequestID();
 			arrRequest["method"] = strMethod;
-			if (null != strParams)
+            if (strParams != null)
 			{
-				arrRequest["params"] = strParams;
+                arrRequest["params"] = strParams;
 			}
 
 			string strJson = JsonConvert.SerializeObject(arrRequest);
