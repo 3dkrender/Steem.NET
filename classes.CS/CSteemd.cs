@@ -255,7 +255,7 @@ namespace SteemAPI.CS
 		//
 		// from - the absolute sequence number, -1 means most recent, limit Is the number of operations before from.
 		// limit - the maximum number of items that can be queried (0 to 1000], must be less than from
-		public JToken get_account_history(string account, UInt64 from , UInt32 limit)
+		public JToken get_account_history(string account, Int64 from , UInt32 limit)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(account);
@@ -263,6 +263,39 @@ namespace SteemAPI.CS
 			arrParams.Add(limit);
 			return call_api_token(MethodBase.GetCurrentMethod().Name, arrParams);
 		}
-		#endregion 
-	}
+
+        public JArray get_followers(string account, string start = null, string type = "blog", uint limit = 1000)
+        {
+            ArrayList arrParams = new ArrayList();
+            arrParams.Add(account);
+            arrParams.Add(start);
+            arrParams.Add(type);
+            arrParams.Add(limit);
+            return call_api_array(MethodBase.GetCurrentMethod().Name, arrParams);
+        }
+
+        public JArray get_following(string account, string start = null, string type = "blog", uint limit = 1000)
+        {
+            ArrayList arrParams = new ArrayList();
+            arrParams.Add(account);
+            arrParams.Add(start);
+            arrParams.Add(type);
+            arrParams.Add(limit);
+            return call_api_array(MethodBase.GetCurrentMethod().Name, arrParams);
+        }
+
+        public JToken get_discussion(string author, string permlink, string api = "tags_api")
+        {
+            string method = MethodBase.GetCurrentMethod().Name;
+            if (!String.IsNullOrEmpty(api))
+                method = string.Format("{0}.{1}", api, method);
+
+            ArrayList arrParams = new ArrayList();
+            arrParams.Add(author);
+            arrParams.Add(permlink);
+
+            return call_api_token(method, arrParams);
+        }
+        #endregion
+    }
 }
