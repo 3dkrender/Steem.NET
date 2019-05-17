@@ -178,7 +178,7 @@ namespace SteemAPI.CS
 		//    from: - the absolute sequence number, -1 means most recent, limit Is
 		//    the number Of operations before from. (type: uint32_t)
 		//    limit: - the maximum number of items that can be queried (0 to 1000], must be less than from (type: uint32_t)
-		public JToken get_account_history(string account, UInt32 from, UInt32 limit)
+		public JToken get_account_history(string account, Int32 from, UInt32 limit)
 		{
 			ArrayList arrParams = new ArrayList();
 			arrParams.Add(account);
